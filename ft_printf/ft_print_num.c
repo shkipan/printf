@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 09:38:28 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 15:25:31 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,54 +25,64 @@ char	*fill_str_num(t_format **prop, size_t length)
 	i = 0;
 	while (i < size)
 	{
-		res[i] = (!((*prop)->zero)) ? ' ' : '0';
+		res[i] = ' ';
 		i++;
 	}
 	res[i] = '\0';
 	return (res);
 }
 
-char	*check_minus(int *c, size_t *size, t_format **prop)
+void	figure_sign(t_format **prop, char **s, long long int c)
 {
-	if ((*prop)->plus)
-		(*prop)->space = 0;
-	if ((*prop)->prec)
-		(*prop)->zero = 0;
-	if ((*prop)->minus)
-		(*prop)->zero = 0;
-	*size = 0;
-	if (*c < 0 || (*prop)->space)
+	char	*temp;
+
+	if (((int)c >= 0 && (*prop)->plus) || ((int)c < 0 && *s[0] != '-'))
 	{
-		*c = (*c < 0) ? -(*c) : *c;
-		*size = 1;
-		(!((*prop)->space)) ? ft_putchar('-') : ft_putchar(' ');
+		temp = *s;
+		*s = ((int)c < 0) ? ft_strjoin("-", *s) : ft_strjoin("+", *s);
+		free(temp);
 	}
-	if (*c > 0 && (*prop)->plus)
+	if ((*prop)->space && !(*s[0] == '-' || *s[0] == '+'))
 	{
-		*size = 1;
-		ft_putchar('+');
+		temp = *s;
+		*s = ft_strjoin(" ", *s);
+		free(temp);
 	}
-	return (ft_itoa(*c));
+}
+
+char	*create_numb(t_format **prop, long long int c)
+{
+	char	*s;
+	char	*t;
+	size_t	i;
+
+	s = ((*prop)->dot && !(*prop)->prec && c == 0)
+		? ft_strdup("") : ft_itoa((int)c);
+	if ((int)c < 0 && (*prop)->prec > ft_strlen(s))
+		s[0] = '0';
+	i = ft_strlen(s) - 1;
+	while (++i < (*prop)->prec)
+	{
+		t = s;
+		s = ft_strjoin("0", s);
+		free(t);
+	}
+	figure_sign(prop, &s, c);
+	return (s);
 }
 
 int		ft_print_num(t_format **prop, va_list argument)
 {
-	char	*s;
-	char	*f;
-	char	*temp;
-	size_t	size;
-	int		c;
+	char			*s;
+	char			*f;
+	size_t			size;
+	long long int	c;
 
-	c = va_arg(argument, int);
-	s = check_minus(&c, &size, prop);
-	size += ft_strlen(s);
-	while (size < (*prop)->prec)
-	{
-		temp = s;
-		s = ft_strjoin("0", s);
-		free(temp);
-		size++;
-	}
+	(*prop)->space = ((*prop)->plus) ? 0 : (*prop)->space;
+	(*prop)->zero = ((*prop)->prec || (*prop)->minus) ? 0 : (*prop)->zero;
+	c = va_arg(argument, long long);
+	s = create_numb(prop, c);
+	size = ft_strlen(s);
 	f = fill_str_num(prop, size);
 	size += ft_strlen(f);
 	(*prop)->minus == 0 ? ft_putstr(f) : ft_putstr(s);

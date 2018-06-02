@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 11:11:20 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/27 22:19:48 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:32:12 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 /*
 **my own functions
 */
-char			*ft_str_cut(char *str, int size);
+char			*ft_str_cut(char *str, size_t size);
 char			*ft_itoa_base(long value, long base);
 int				ft_atoi_bin(char *s);
 void			ft_putnstr(char const *s, size_t length);
