@@ -1,3 +1,4 @@
 *.swp
+libftprintf.a
 *.o
-.DStore
+.DS_Store

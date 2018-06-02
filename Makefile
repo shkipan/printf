@@ -6,7 +6,7 @@
 #    By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 15:39:00 by dskrypny          #+#    #+#              #
-#    Updated: 2018/06/02 09:23:12 by dskrypny         ###   ########.fr        #
+#    Updated: 2018/06/02 15:41:15 by dskrypny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ all: $(NAME)
 
 $(NAME):
 	@gcc -c $(FLAGS)  $(SOURCE)
-	@ar rcs $(NAME) *.o
+	@ar rc $(NAME) *.o
 	@echo "lib created"
 
 clean:
