@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 11:07:51 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 17:19:05 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int		ft_print_str(t_format **prop, va_list argument)
 	(*prop)->minus == 0 ? ft_putstr(f) : ft_putstr(s);
 	(*prop)->minus == 1 ? ft_putstr(f) : ft_putstr(s);
 	free(f);
-	free(s);
 	return (size);
 }
