@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 19:49:25 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/27 21:34:25 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 10:36:31 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int		ft_print_chr(t_format **prop, va_list argument)
 {
 	int		ch;
 	char	*f;
+	int		size;
 
 	ch = va_arg(argument, int);
 	f = fill_str_chr(prop);
+	size = ft_strlen(f);
 	(*prop)->minus == 0 ? ft_putstr(f) : ft_putchar(ch);
 	(*prop)->minus == 1 ? ft_putstr(f) : ft_putchar(ch);
 	free(f);
-	return (ft_strlen(f) + 1);
+	return (size + 1);
 }

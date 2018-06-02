@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:36:36 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/27 15:54:14 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 10:33:39 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_find_flag(size_t *index, char *format, va_list argument,
 		{
 			*index += 1;
 			(*prop)->type = flags->flag;
-			res += flags->ft(prop, argument);
+			res = flags->ft(prop, argument);
 		}
 		temp = flags->next;
 		free(flags);

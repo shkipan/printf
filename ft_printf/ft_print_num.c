@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 09:30:20 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 09:38:28 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*fill_str_num(t_format **prop, size_t length)
 
 char	*check_minus(int *c, size_t *size, t_format **prop)
 {
-
 	if ((*prop)->plus)
 		(*prop)->space = 0;
 	if ((*prop)->prec)

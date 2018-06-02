@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/27 22:39:45 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 11:07:51 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,17 @@ int		ft_print_str(t_format **prop, va_list argument)
 	size_t	size;
 
 	s = va_arg(argument, char *);
+	if (s == NULL)
+		s = "(null)";
+	if (!((*prop)->prec) && (*prop)->dot)
+		s = "";
+	s = ft_str_cut(s, (*prop)->prec);
 	size = ft_strlen(s);
 	f = fill_str_str(prop, size);
 	size += ft_strlen(f);
 	(*prop)->minus == 0 ? ft_putstr(f) : ft_putstr(s);
 	(*prop)->minus == 1 ? ft_putstr(f) : ft_putstr(s);
 	free(f);
+	free(s);
 	return (size);
 }

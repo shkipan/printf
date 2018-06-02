@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 19:24:38 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/31 20:51:32 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 10:30:42 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		skip_num(char *s, t_format **formating, char c)
 	int k;
 
 	k = 0;
+	if (c == '.')
+		(*formating)->dot = 1;
 	if (c != '.')
 		(*formating)->width = ft_atoi(s);
 	else
@@ -53,19 +55,19 @@ int		ft_parser(t_format **formating, size_t *index, char *format,
 	start = format + *index + 1;
 	while (is_supp(*(start + ++pos)))
 	{
-		if (*(start + pos) == '0' && (*formating)->zero == 0)
+		if (*(start + pos) == '0' && *(start + pos - 1) != '.')
 			(*formating)->zero = 1;
-		if (ft_isdigit(*(start + pos)))
+		else if (ft_isdigit(*(start + pos)))
 			pos += skip_num(start + pos, formating, *(start + pos - 1));
-		if (*(start + pos) == '+')
+		else if (*(start + pos) == '+')
 			(*formating)->plus = 1;
-		if (*(start + pos) == '#')
+		else if (*(start + pos) == '#')
 			(*formating)->hash = 1;
-		if (*(start + pos) == ' ')
+		else if (*(start + pos) == ' ')
 			(*formating)->space = 1;
-		if (*(start + pos) == '-')
+		else if (*(start + pos) == '-')
 			(*formating)->minus = 1;
-		if (*(start + pos) == '*')
+		else if (*(start + pos) == '*')
 			(*formating)->width = va_arg(argument, size_t);
 	}
 	return (pos + 1);

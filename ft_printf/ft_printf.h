@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:21:58 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 09:21:43 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 11:05:11 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ typedef struct			s_format
 {
 	int		type;
 	size_t	width;
-	
 	size_t	prec;
 	int		plus;
 	int		minus;
 	int		hash;
 	int		zero;
 	int		space;
+	int		dot;
 }						t_format;
 
 typedef struct s_flags	t_flag;

@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/27 15:58:21 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 11:36:38 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ char	*fill_str_hex(t_format **prop, size_t length)
 	return (res);
 }
 
+char	*create_hex(t_format **prop, unsigned int c)
+{
+	char	*s;
+	char	*f;
+
+	s = ((*prop)->dot && !((*prop)->prec) && c == 0)
+		? ft_strdup("") : ft_itoa_base(c, 16);
+	if ((*prop)->hash && c != 0)
+	{
+		f = s;
+		s = (*prop)->type == 'x' ? ft_strjoin("0x", s) : ft_strjoin("0X", s);
+		free(f);
+	}
+	if ((*prop)->type == 'X')
+		ft_strcapit(s);
+	return (s);
+}
+
+
+
 int		ft_print_hex(t_format **prop, va_list argument)
 {
 	char			*s;
@@ -40,15 +60,8 @@ int		ft_print_hex(t_format **prop, va_list argument)
 	unsigned int	c;
 
 	c = va_arg(argument, unsigned int);
-	s = ft_itoa_base(c, 16);
-	if ((*prop)->type == 'X')
-		ft_strcapit(s);
+	s = create_hex(prop, c);
 	size = ft_strlen(s);
-	if ((*prop)->hash && c != 0)
-	{
-		(*prop)->type == 'x' ? ft_putstr("0x") : ft_putstr("0X");
-		size += 2;
-	}
 	(*prop)->zero = ((*prop)->minus) ? 0 : (*prop)->zero;
 	f = fill_str_hex(prop, size);
 	size += ft_strlen(f);
