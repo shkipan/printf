@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 17:05:54 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 18:13:22 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ char	*create_hex(t_format **prop, unsigned int c)
 		ft_strcapit(s);
 	return (s);
 }
-
-
 
 int		ft_print_hex(t_format **prop, va_list argument)
 {
