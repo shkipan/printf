@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/05/31 20:54:46 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/02 09:30:20 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*check_minus(int *c, size_t *size, t_format **prop)
 		*size = 1;
 		(!((*prop)->space)) ? ft_putchar('-') : ft_putchar(' ');
 	}
-	if (*c > 0)
+	if (*c > 0 && (*prop)->plus)
 	{
 		*size = 1;
 		ft_putchar('+');
