@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/27 19:01:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 10:52:41 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:38:25 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_print_uni(t_format **prop, va_list argument)
 	c = va_arg(argument, int);
 	s = ft_itoa_base(c, 2);
 	x = select_size(ft_strlen(s));
-	(*prop)->width -= x - 1;
+	(*prop)->width -= ((x - 1) <= (*prop)->width) ? x - 1 : 0;
 	f = fill_str_chr(prop);
 	size = ft_strlen(f);
 	(*prop)->minus == 0 ? ft_putstr(f) : create_uni(s, c);

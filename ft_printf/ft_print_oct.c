@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 15:38:49 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:04:36 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ char	*fill_str_oct(t_format **prop, size_t length)
 	return (res);
 }
 
-char	*check_nul(t_format **prop, unsigned int c, size_t *size)
+char	*check_nul(t_format **prop, size_t c, size_t *size)
 {
 	char	*temp;
 	char	*s;
 
-	s = ft_itoa_base(c, 8);
+	s = ft_itoa_base_printf(c, 8);
 	*size = ft_strlen(s);
 	if ((*prop)->hash == 1 && c != 0)
 	{
@@ -61,9 +61,9 @@ int		ft_print_oct(t_format **prop, va_list argument)
 	char			*s;
 	char			*f;
 	size_t			size;
-	unsigned int	c;
+	size_t			c;
 
-	c = va_arg(argument, unsigned int);
+	c = ft_find_arg(prop, argument);
 	s = check_nul(prop, c, &size);
 	f = fill_str_oct(prop, size);
 	size += ft_strlen(f);

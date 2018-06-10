@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 19:49:25 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 10:36:31 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:41:09 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 char	*fill_str_chr(t_format **prop)
 {
 	char	*res;
+	char	*t;
 	size_t	i;
 
 	if ((*prop)->width == 0)
 		return (ft_strdup(""));
-	res = (char *)malloc(sizeof(char) * (*prop)->width);
+	res = ft_strdup("");
 	i = -1;
 	while (++i < (*prop)->width - 1)
-		res[i] = ' ';
-	res[i] = '\0';
+	{
+		t = res;
+		res = ft_strjoin(" ", res);
+		free(t);
+	}
 	return (res);
 }
 

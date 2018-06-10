@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 18:13:22 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:04:22 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,39 @@
 char	*fill_str_hex(t_format **prop, size_t length)
 {
 	char	*res;
+	char	*temp;
 	size_t	i;
 	size_t	size;
 
 	if ((*prop)->width == 0 || length > (*prop)->width)
 		return (ft_strdup(""));
 	size = (*prop)->width - length;
-	res = (char *)malloc(sizeof(char) * (size - 1));
-	i = 0;
-	while (i < size)
+	res = ft_strdup("");
+	i = -1;
+	while (++i < size)
 	{
-		res[i] = (!((*prop)->zero)) ? ' ' : '0';
-		i++;
+		temp = res;
+		res = ft_strjoin(res, " ");
+		free(temp);
 	}
-	res[i] = '\0';
 	return (res);
 }
 
-char	*create_hex(t_format **prop, unsigned int c)
+char	*create_hex(t_format **prop, size_t c)
 {
 	char	*s;
 	char	*f;
+	size_t	i;
 
 	s = ((*prop)->dot && !((*prop)->prec) && c == 0)
-		? ft_strdup("") : ft_itoa_base(c, 16);
+		? ft_strdup("") : ft_itoa_base_printf(c, 16);
+	i = ft_strlen(s) - 1;
+	while (++i < ((*prop)->width - 2 * (*prop)->hash) && (*prop)->zero)
+	{
+		f = s;
+		s = ft_strjoin("0", s);
+		free(f);
+	}
 	if ((*prop)->hash && c != 0)
 	{
 		f = s;
@@ -55,9 +64,9 @@ int		ft_print_hex(t_format **prop, va_list argument)
 	char			*s;
 	char			*f;
 	size_t			size;
-	unsigned int	c;
+	size_t			c;
 
-	c = va_arg(argument, unsigned int);
+	c = ft_find_arg(prop, argument);
 	s = create_hex(prop, c);
 	size = ft_strlen(s);
 	(*prop)->zero = ((*prop)->minus) ? 0 : (*prop)->zero;

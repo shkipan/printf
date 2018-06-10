@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:36:36 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 18:14:41 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:17:41 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@ size_t	ft_find_flag(size_t *index, char *format, va_list argument,
 	t_flag		*temp;
 	size_t		res;
 	int			success;
+	char		sym;
 
 	res = 0;
 	success = 0;
 	flags = NULL;
 	ft_init_flags(&flags);
+	sym = ft_correct_flags(prop, *(format + *index));
 	while (flags)
 	{
-		if (flags->flag == *(format + *index) && !success)
+		if (flags->flag == sym && !success)
 		{
 			*index += 1;
-			(*prop)->type = flags->flag;
+			(*prop)->type = sym;
 			res = flags->ft(prop, argument);
 			success = 1;
 		}
@@ -55,6 +57,8 @@ size_t	ft_format(va_list argument, size_t *index, char *format)
 		printed = ft_print_sym(&prop, *(format + *index));
 		*index += 1;
 	}
+	if (prop->color)
+		ft_putstr("\033[0m");
 	free(prop);
 	return (printed);
 }

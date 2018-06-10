@@ -6,13 +6,13 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 18:58:42 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/10 15:43:50 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:22:31 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char			*fill_str_num(t_format **prop, size_t length)
+char	*fill_str_uns(t_format **prop, size_t length)
 {
 	char	*res;
 	char	*t;
@@ -35,14 +35,14 @@ char			*fill_str_num(t_format **prop, size_t length)
 	return (res);
 }
 
-void			figure_sign(t_format **prop, char **s, long long int c)
+void	figure_sign_uns(t_format **prop, char **s, long long int c)
 {
 	char	*temp;
 
-	if ((*prop)->plus && !(*s[0] == '-' || *s[0] == '+'))
+	if ((*prop)->plus)
 	{
 		temp = *s;
-		*s = (c < 0) ? ft_strjoin("-", *s) : ft_strjoin("+", *s);
+		*s = ((int)c < 0) ? ft_strjoin("-", *s) : ft_strjoin("+", *s);
 		free(temp);
 	}
 	if ((*prop)->space && !(*s[0] == '-' || *s[0] == '+'))
@@ -53,7 +53,7 @@ void			figure_sign(t_format **prop, char **s, long long int c)
 	}
 }
 
-char			*create_numb(t_format **p, long long int c)
+char	*create_uns(t_format **p, size_t c)
 {
 	char	*s;
 	char	*t;
@@ -72,43 +72,43 @@ char			*create_numb(t_format **p, long long int c)
 		s = ft_strjoin("0", s);
 		free(t);
 	}
-	figure_sign(p, &s, c);
+	figure_sign_uns(p, &s, c);
 	return (s);
 }
 
-long long int	ft_find_arg_num(t_format **p, va_list argument)
+size_t	ft_find_arg_uns(t_format **p, va_list argument)
 {
-	long long int ret;
+	size_t ret;
 
 	if ((*p)->s_mod == 1)
-		ret = (char)va_arg(argument, int);
+		ret = (unsigned char)va_arg(argument, int);
 	else if ((*p)->s_mod == 2)
-		ret = (short int)va_arg(argument, int);
+		ret = (unsigned short int)va_arg(argument, int);
 	else if ((*p)->s_mod == 3)
-		ret = va_arg(argument, long int);
+		ret = va_arg(argument, unsigned long int);
 	else if ((*p)->s_mod == 4)
-		ret = va_arg(argument, long long int);
+		ret = va_arg(argument, unsigned long long int);
 	else if ((*p)->s_mod == 5)
-		ret = va_arg(argument, intmax_t);
+		ret = va_arg(argument, uintmax_t);
 	else if ((*p)->s_mod == 6)
 		ret = va_arg(argument, size_t);
 	else
-		ret = va_arg(argument, int);
+		ret = va_arg(argument, unsigned int);
 	return (ret);
 }
 
-int				ft_print_num(t_format **prop, va_list argument)
+int		ft_print_uns(t_format **prop, va_list argument)
 {
 	char			*s;
 	char			*f;
 	size_t			size;
-	long long int	c;
+	size_t			c;
 
 	(*prop)->zero = ((*prop)->minus) ? 0 : (*prop)->zero;
-	c = ft_find_arg_num(prop, argument);
-	s = create_numb(prop, c);
+	c = ft_find_arg_uns(prop, argument);
+	s = create_uns(prop, c);
 	size = ft_strlen(s);
-	f = fill_str_num(prop, size);
+	f = fill_str_uns(prop, size);
 	size += ft_strlen(f);
 	(*prop)->minus == 0 ? ft_putstr(f) : ft_putstr(s);
 	(*prop)->minus == 1 ? ft_putstr(f) : ft_putstr(s);

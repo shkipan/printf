@@ -6,7 +6,7 @@
 /*   By: dskrypny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 18:55:04 by dskrypny          #+#    #+#             */
-/*   Updated: 2018/06/02 10:25:16 by dskrypny         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:34:11 by dskrypny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void	ft_init_format(t_format **prop)
 	(*prop)->hash = 0;
 	(*prop)->zero = 0;
 	(*prop)->space = 0;
+	(*prop)->color = 0;
+	(*prop)->s_mod = 0;
 }
